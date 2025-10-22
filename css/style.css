@@ -1,12 +1,17 @@
 * {
     box-sizing: border-box;
 }
-
+body{
+   text-align: center;
+   background-color: rgb(187, 187, 187);
+}
+table{
+   margin: auto;
+}
 .cell{
    border: 2px solid rgb(75, 75, 75);
    width: 28px;
    height: 28px;
-   text-align: center;
 }
 .hidden{
    font-size: 0px;
@@ -18,3 +23,11 @@
     margin: 10px;
     border-radius: 5px;
 }
+.flag{
+   font-size: 15px;
+}
+footer{
+   margin: 20px;
+}
+/* .hint{
+} */

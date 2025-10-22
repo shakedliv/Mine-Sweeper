@@ -17,3 +17,7 @@ function getRandomCell(board) {
 	const randomIdx = getRandomInt(0, emptyCells.length)
 	return emptyCells[randomIdx] // returns obj - {i, j}
 }
+
+function changeBackgroundColor(element) {
+   console.log(element);
+}

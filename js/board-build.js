@@ -18,17 +18,27 @@ var gTotalCells = gLevel.SIZE ** 2
 var gCellsReveled
 var isFirstCellClicked = false
 var gLivesLeft
+var gHintsLeft
 console.log('gTotalCells:', gTotalCells)
 
 
 function onInitGame() {
+   resetVariants()
+   renderLives()
+   renderHints()
+   gBoard = buildBoard()
+   renderBoard(gBoard)
+
+}
+function resetVariants() {
    gCellsReveled = 0
-   gGame.isGameOn = true
    gLivesLeft = 3
+   gHintsLeft = 3
+   gGame.isGameOn = true
+   gGame.markedCount = 0
    isFirstCellClicked = false
-    gBoard = buildBoard()
-    renderBoard(gBoard)
-    console.log(gBoard)
+   const elSmileyButton = document.querySelector('.smiley-button')
+   elSmileyButton.innerText = '😀'
 }
 
 function buildBoard() {
@@ -61,14 +71,13 @@ function renderBoard(board) {
 
             if (currCell.isMine) cellClass += ' mine'
 
-            // strHTML += '\t<td class="cell ' + cellClass + '"  onclick="moveTo(' + i + ',' + j + ')" >\n'
            strHTML += `<td class="hidden cell ${cellClass}" onclick="onCellClicked(this, ${i}, ${j})"
-            oncontextmenu="onCellMarked(this, ${i}, ${j}, event)">`
+            oncontextmenu="onCellMarked(this, ${i}, ${j}, event)"><span class="content">`
 
             currCell.isMine
                 ? (strHTML += MINE)
                 : (strHTML += gBoard[i][j].minesAroundCount)
-            strHTML += '</td>'
+            strHTML += '</span> <span class="flag"></span></td>'
         }
         strHTML += '</tr>'
     }
@@ -105,10 +114,29 @@ function countNeighbors(cellI, cellJ) {
 }
 
 function setMinesRandomly(amountOfMines) {
-   gBoard[0][1].isMine = true
-   gBoard[1][3].isMine = true
-   //  for (var i = 0; i < amountOfMines; i++) {
-   //      var currMine = getRandomCell(gBoard) //returns an obj with its location {i:i, j:j}
-   //      gBoard[currMine.i][currMine.j].isMine = true
-   //  }
+   // gBoard[0][1].isMine = true
+   // gBoard[1][3].isMine = true
+    for (var i = 0; i < amountOfMines; i++) {
+        var currMine = getRandomCell(gBoard) //returns an obj with its location {i:i, j:j}
+        gBoard[currMine.i][currMine.j].isMine = true
+    }
+}
+
+
+function renderLives() {
+   var livesStr = ''
+   for (var i = 0; i < gLivesLeft; i++){
+      livesStr += '❤️'
+   }
+   const elLives = document.querySelector('.lives')
+   elLives.innerText = livesStr
+}
+
+function renderHints() {
+   var hintsStrHtml = ''
+   for (var i = 0; i < gHintsLeft; i++){
+      hintsStrHtml += `<span class="hint" onclick="changeBackgroundColor(this)">💡</span>`
+   }
+   const elHints = document.querySelector('.hints')
+   elHints.innerHTML = hintsStrHtml
 }
