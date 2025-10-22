@@ -1,25 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Mine sweeper</title>
-   <link rel="stylesheet" href="css/style.css">
-</head>
-<body onload="onInitGame()">
-   <table>
-      <thead class="header">
-         <div>
-         <span class="hints"></span>
-         <button class="smiley-button" onclick="onInitGame()"></button>
-         <span class="lives"></span>
-         </div>
-      </thead>
-    <tbody class="board"></tbody>
-  </table>
-  <footer>© Made by Shaked Livyani</footer>
-  <script src="js/utils.js"></script>
-   <script src="js/board-build.js"></script>
-   <script src="js/game-logic.js"></script>
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Mine sweeper</title>
+        <link rel="stylesheet" href="css/style.css" />
+    </head>
+    <body onload="onInitGame()">
+       <thead class="header">
+          <h1>Mine Sweeper</h1>
+          <div>
+             <span class="hints"></span>
+             <button
+             class="smiley-button"
+             onclick="onInitGame()"
+             ></button>
+             <span class="lives"></span>
+            </div>
+            <div class="timer">0.000</div>
+            
+            
+         </thead>
+         <tbody >
+            
+            <table class="board">
+            </table>
+            <div class="difficulty-btns-container">
+               <h2 class="small-header">Choose Difficulty:</h2>
+               
+               <div class="difficulty-btns">
+                  <button onclick="setDifficulty('Beginner')">Beginner</button>
+                  <button onclick="setDifficulty('Medium')">Medium</button>
+                  <button onclick="setDifficulty('Expert')">Expert</button>
+               </div>
+            </div>
+            <footer>© Made by Shaked Livyani</footer>
+         </tbody>
+        <script src="js/utils.js"></script>
+        <script src="js/board-build.js"></script>
+        <script src="js/game-logic.js"></script>
+    </body>
 </html>

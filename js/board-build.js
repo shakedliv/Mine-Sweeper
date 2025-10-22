@@ -12,13 +12,17 @@ var gGame = {
     markedCount: 0,
     secsPassed: 0,
 }
+var gHints = {
+   hintsLeft: 3,
+   isHintOn: false
+}
 
 var gBoard
-var gTotalCells = gLevel.SIZE ** 2
+var gTotalCells
 var gCellsReveled
 var isFirstCellClicked = false
 var gLivesLeft
-var gHintsLeft
+var gTimerInterval
 console.log('gTotalCells:', gTotalCells)
 
 
@@ -26,14 +30,16 @@ function onInitGame() {
    resetVariants()
    renderLives()
    renderHints()
+   resetTimer()
    gBoard = buildBoard()
    renderBoard(gBoard)
 
 }
 function resetVariants() {
    gCellsReveled = 0
+   gTotalCells = gLevel.SIZE ** 2
    gLivesLeft = 3
-   gHintsLeft = 3
+   gHints.hintsLeft = 3
    gGame.isGameOn = true
    gGame.markedCount = 0
    isFirstCellClicked = false
@@ -134,9 +140,44 @@ function renderLives() {
 
 function renderHints() {
    var hintsStrHtml = ''
-   for (var i = 0; i < gHintsLeft; i++){
-      hintsStrHtml += `<span class="hint" onclick="changeBackgroundColor(this)">💡</span>`
+   for (var i = 0; i < gHints.hintsLeft; i++){
+      hintsStrHtml += `<span class="hint" onclick="markHint(this)">💡</span>`
    }
    const elHints = document.querySelector('.hints')
    elHints.innerHTML = hintsStrHtml
+}
+
+
+function setDifficulty(difficulty) {
+   switch (difficulty) {
+      case 'Beginner':
+         gLevel.SIZE = 4
+         gLevel.MINES = 2
+         break
+         case 'Medium':
+         gLevel.SIZE = 8
+         gLevel.MINES = 14
+         break
+      case 'Expert':
+         gLevel.SIZE = 12
+         gLevel.MINES = 32
+         break
+
+   }
+   onInitGame()
+   
+}
+
+function startTimer() {
+    const elTimer = document.querySelector('.timer')
+    const startTime = Date.now()
+    gTimerInterval = setInterval(() => {
+        var diff = Date.now() - startTime
+        elTimer.innerText = (diff / 1000).toFixed(3)
+    }, 10)
+}
+function resetTimer() {
+    clearInterval(gTimerInterval)
+    const elTimer = document.querySelector('.timer')
+    elTimer.innerText = '0.000'
 }

@@ -1,9 +1,42 @@
-* {
-    box-sizing: border-box;
-}
+
 body{
    text-align: center;
    background-color: rgb(187, 187, 187);
+}
+.smiley-button{
+    background-color: rgb(253, 253, 253);
+    padding: 3px;
+    margin: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+
+}
+.difficulty-btns-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+
+}
+
+.small-header {
+    margin-bottom: 6px;
+    font-size: 0.8em;
+    font-weight: lighter;
+}
+
+.difficulty-btns {
+    gap: 5px;
+   }
+   
+   .difficulty-btns button {
+      background-color: #52d7ff;
+      color: #031727;
+    border-radius: 4px;
+    padding: 4px 10px;
+    font-size: 9px;
+    cursor: pointer;
 }
 table{
    margin: auto;
@@ -12,22 +45,19 @@ table{
    border: 2px solid rgb(75, 75, 75);
    width: 28px;
    height: 28px;
+    cursor: pointer;
+
 }
 .hidden{
    font-size: 0px;
    background-color: gray;
 }
-.smiley-button{
-    background-color: rgb(253, 253, 253);
-    padding: 3px;
-    margin: 10px;
-    border-radius: 5px;
-}
 .flag{
    font-size: 15px;
 }
 footer{
-   margin: 20px;
+   margin: 50px;
 }
-/* .hint{
-} */
+.hint{
+   cursor: pointer;
+}
