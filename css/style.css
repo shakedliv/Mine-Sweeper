@@ -8,7 +8,13 @@
    height: 28px;
    text-align: center;
 }
-/* .hidden{
+.hidden{
    font-size: 0px;
    background-color: gray;
-} */
+}
+.smiley-button{
+    background-color: rgb(253, 253, 253);
+    padding: 3px;
+    margin: 10px;
+    border-radius: 5px;
+}

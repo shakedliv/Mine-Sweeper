@@ -10,7 +10,7 @@ function getRandomCell(board) {
 	const emptyCells = []
    for (var i = 0; i < board.length; i++) {
       for (var j = 0; j < board[i].length; j++) {
-         if(!board[i][j].isMine)
+         if(!board[i][j].isMine && !board[i][j].isRevealed)
             emptyCells.push({ i, j })// creates an object array {i: i, j: j}
       }
    }
