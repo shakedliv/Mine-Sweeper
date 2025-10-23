@@ -23,16 +23,22 @@ var gCellsReveled
 var isFirstCellClicked = false
 var gLivesLeft
 var gTimerInterval
-console.log('gTotalCells:', gTotalCells)
+var gBestScoreBeginner = Infinity
+var gBestScoreMedium = Infinity
+var gBestScoreExpert = Infinity
+var gStartTime
 
 
 function onInitGame() {
+   resetTimer()
    resetVariants()
    renderLives()
    renderHints()
-   resetTimer()
    gBoard = buildBoard()
    renderBoard(gBoard)
+   const bestScore = localStorage.getItem('BestTime-' + gLevel.SIZE)
+   console.log(bestScore);
+   if (+bestScore) { setBestScore(gLevel.SIZE, bestScore) }
 
 }
 function resetVariants() {
@@ -100,7 +106,8 @@ function getClassName(location) {
 function setMinesNegsCount() {
     for (var i = 0; i < gBoard.length; i++) {
         for (var j = 0; j < gBoard[i].length; j++) {
-            gBoard[i][j].minesAroundCount = countNeighbors(i, j)
+           gBoard[i][j].minesAroundCount = countNeighbors(i, j)
+           if( gBoard[i][j].minesAroundCount === 0) gBoard[i][j].minesAroundCount = ' '
         }
     }
 }
@@ -115,7 +122,8 @@ function countNeighbors(cellI, cellJ) {
             if (i === cellI && j === cellJ) continue
             if (gBoard[i][j].isMine) counter++
         }
-    }
+   }
+   console.log('counter:', counter)
     return counter
 }
 
@@ -170,14 +178,16 @@ function setDifficulty(difficulty) {
 
 function startTimer() {
     const elTimer = document.querySelector('.timer')
-    const startTime = Date.now()
+    gStartTime = Date.now()
     gTimerInterval = setInterval(() => {
-        var diff = Date.now() - startTime
-        elTimer.innerText = (diff / 1000).toFixed(3)
+       var diff = Date.now() - gStartTime
+       elTimer.innerText = (diff / 1000).toFixed(2)
     }, 10)
 }
 function resetTimer() {
+   //  bestScore(gTimer)
     clearInterval(gTimerInterval)
     const elTimer = document.querySelector('.timer')
-    elTimer.innerText = '0.000'
+    elTimer.innerText = '0.00'
 }
+
