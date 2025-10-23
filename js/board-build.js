@@ -22,29 +22,37 @@ var gTotalCells
 var gCellsReveled
 var isFirstCellClicked = false
 var gLivesLeft
+var gSafeClicksLeft
 var gTimerInterval
 var gBestScoreBeginner = Infinity
 var gBestScoreMedium = Infinity
 var gBestScoreExpert = Infinity
 var gStartTime
-
+var gIsSafeClickOn = false
+var gIsDarkMode = true
 
 function onInitGame() {
    resetTimer()
    resetVariants()
    renderLives()
-   renderHints()
+   // renderHints() not working :/
    gBoard = buildBoard()
    renderBoard(gBoard)
    const bestScore = localStorage.getItem('BestTime-' + gLevel.SIZE)
-   console.log(bestScore);
    if (+bestScore) { setBestScore(gLevel.SIZE, bestScore) }
+   else {
+      const elBestScore = document.querySelector('.best-score')
+      elBestScore.innerText = 'Best Score: 0.00'
+   }
 
 }
 function resetVariants() {
    gCellsReveled = 0
    gTotalCells = gLevel.SIZE ** 2
    gLivesLeft = 3
+   gSafeClicksLeft = 3
+   const elSafeClickCounter = document.querySelector('.safe-click-counter')
+   elSafeClickCounter.innerText = gSafeClicksLeft + ' clicks available'
    gHints.hintsLeft = 3
    gGame.isGameOn = true
    gGame.markedCount = 0
@@ -123,15 +131,12 @@ function countNeighbors(cellI, cellJ) {
             if (gBoard[i][j].isMine) counter++
         }
    }
-   console.log('counter:', counter)
     return counter
 }
 
 function setMinesRandomly(amountOfMines) {
-   // gBoard[0][1].isMine = true
-   // gBoard[1][3].isMine = true
     for (var i = 0; i < amountOfMines; i++) {
-        var currMine = getRandomCell(gBoard) //returns an obj with its location {i:i, j:j}
+        var currMine = getRandomEmptyCell(gBoard) //returns an obj with its location {i:i, j:j}
         gBoard[currMine.i][currMine.j].isMine = true
     }
 }
@@ -185,7 +190,6 @@ function startTimer() {
     }, 10)
 }
 function resetTimer() {
-   //  bestScore(gTimer)
     clearInterval(gTimerInterval)
     const elTimer = document.querySelector('.timer')
     elTimer.innerText = '0.00'

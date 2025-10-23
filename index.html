@@ -8,9 +8,20 @@
     </head>
     <body onload="onInitGame()">
        <thead class="header">
+         <button class="dark-mode" onclick="toggleDarkMode()">light mode</button>
           <h1>Mine Sweeper</h1>
           <div>
-             <span class="hints"></span>
+            <button class="safe-click" onclick="markSafeCell()">
+               Safe click
+            </button>
+            <div class="safe-click-counter">3 clicks available</div>
+       
+          </div>
+          <div>
+
+            <!-- not working :/  -->
+             <!-- <span class="hints"></span> -->
+
              <button
              class="smiley-button"
              onclick="onInitGame()"
@@ -18,6 +29,7 @@
              <span class="lives"></span>
             </div>
             <div> 
+               <span>Timer: </span>
                <span class="timer">0.000></span>
                <span class="best-score">Best Score: 0.00</span>
             </div>

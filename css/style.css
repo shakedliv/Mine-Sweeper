@@ -1,23 +1,30 @@
-
-body{
+body {
    text-align: center;
-   background-color: rgb(187, 187, 187);
+   background-color: rgb(32, 32, 32);
+   color: rgba(43, 110, 100, 1);
 }
-.smiley-button{
-    background-color: rgb(253, 253, 253);
+button{
+   cursor: pointer;
+   background-color: #141c1fff;
+   color:rgba(43, 110, 100, 1);
+}
+.dark-mode {
+    font-size: 5px;
+    position: absolute;
+    top: 7px;
+    left: 7px;
+    padding: 5px;
+}
+.safe-click {
+    padding: 5px;
+}
+.safe-click-counter {
+    font-size: 10px;
+}
+.smiley-button {
     padding: 3px;
     margin: 10px;
     border-radius: 5px;
-    cursor: pointer;
-
-}
-.difficulty-btns-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: auto;
-
 }
 
 .small-header {
@@ -28,36 +35,32 @@ body{
 
 .difficulty-btns {
     gap: 5px;
-   }
-   
-   .difficulty-btns button {
-      background-color: #52d7ff;
-      color: #031727;
+}
+
+.difficulty-btns button {
     border-radius: 4px;
     padding: 4px 10px;
     font-size: 9px;
+}
+table {
+    margin: auto;
+}
+.cell {
+    border: 2px solid rgb(75, 75, 75);
+    width: 28px;
+    height: 28px;
     cursor: pointer;
 }
-table{
-   margin: auto;
+.hidden {
+    font-size: 0px;
+    background-color: gray;
 }
-.cell{
-   border: 2px solid rgb(75, 75, 75);
-   width: 28px;
-   height: 28px;
+.flag {
+    font-size: 15px;
+}
+footer {
+    margin: 50px;
+}
+/* .hint {
     cursor: pointer;
-
-}
-.hidden{
-   /* font-size: 0px; */
-   background-color: gray;
-}
-.flag{
-   font-size: 15px;
-}
-footer{
-   margin: 50px;
-}
-.hint{
-   cursor: pointer;
-}
+} */
